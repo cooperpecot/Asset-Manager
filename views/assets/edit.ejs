@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editing: <%= a.assetTag %> - <%= a.name %> </title>
+</head>
+<body>
+    <h1><%= a.assetTag %></h1>
+    <form action="/assets/<%= a._id %>?_method=PATCH" method="post">
+        <label for="asset-name">Name: </label>
+        <input type="text" name="asset[name]" id="asset-name" value="<%= a.name %> "> <br>
+        <label for="asset-category">Category: </label>
+        <select name="asset[category]" id="asset-category">
+            <% for(let c of categories){ %>
+                <% const selected = a.category === c ? "selected" : "" %>
+                <option value="<%= c %>" <%= selected %> ><%= c %></option>        
+            <%} %>
+        </select>
+        <br>
+        <label for="asset-id">Unique ID: </label>
+        <input type="text" name="asset[uniqueID]" id="asset-id" value="<%= a.uniqueID %>">
+        <small id="ID-help-block">ie Serial, Phone Number, VIN, etc</small>
+        <p>
+            Is this asset assigned?
+            <label>
+                <input type="radio" name="asset[assigned]" value="true" 
+                <% if(a.assigned){%>
+                    <%= "checked" %>
+                <%} %>>
+                Yes</label>
+            <label>
+                <input type="radio" name="asset[assigned]" value="false"
+                <% if(!a.assigned){%>
+                    <%= "checked" %>
+                <%} %>> 
+                No</label>
+        </p>
+        <label for="asset-location">Location: </label>
+        <input type="text" name="asset[location]" id="asset-location" value="<%= a.location %>"><br>
+        <label for="asset-tag">Tag Number: </label>
+        <input type="text" name="asset[assetTag]" id="asset-tag" value="<%= a.assetTag %>"><br>
+        <button>Submit</button>
+    </form>
+    
+    
+    <a href="/assets">Back to Assets</a>
+</body>
+</html>

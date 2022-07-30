@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= a.name %> - <%= a.assetTag %></title>
+</head>
+<body>
+    <h2><%= a.assetTag %> </h2>
+    <p>
+        Asset Name: <%= a.name %> 
+    </p>  
+    <p>
+        Category: <%= a.category %> 
+    </p>
+    <p>
+        Unique Identifier: <%= a.uniqueID %> 
+    </p>
+    <% if(a.assigned){ %> 
+        <p>
+            Assigned to <%= a.location %> 
+        </p>    
+    <%} else { %>
+        <p>
+            Unassigned - <%= a.location %> 
+        </p>
+    <%} %>
+    <a href="/assets/<%= a.id %>/edit">Edit</a>
+    <br>
+    <a href="/assets">Back to Assets</a>
+    
+    <form action="/assets/<%=a._id%>?_method=DELETE" method="POST">
+        <button>Delete This Asset</button>
+    </form>
+</body>
+</html>
