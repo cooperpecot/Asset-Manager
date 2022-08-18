@@ -1,7 +1,9 @@
 <% layout('layouts/boilerplate') %> 
-<h1>Heres the Assets!</h1>
-    <ul>
+<h1>Assets!</h1>
+    <div class="list-group">
         <% for(let a of assets) {%>
-            <li><%= a.name %> - <a href="/assets/<%= a._id %>"><%= a.assetTag %></a></li>
+            <a class="list-group-item" href="/assets/<%= a._id %>">
+            <%= a.name %> - <%= a.assetTag %>
+            </a> 
         <% } %>  
-    </ul>
+    </div>
