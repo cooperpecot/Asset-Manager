@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editing: <%= a.assetTag %> - <%= a.name %> </title>
-</head>
-<body>
+<% layout('layouts/boilerplate') %> 
     <h1><%= a.assetTag %></h1>
     <form action="/assets/<%= a._id %>?_method=PATCH" method="post">
         <label for="asset-name">Name: </label>
@@ -42,9 +34,5 @@
         <label for="asset-tag">Tag Number: </label>
         <input type="text" name="asset[assetTag]" id="asset-tag" value="<%= a.assetTag %>"><br>
         <button>Submit</button>
-    </form>
-    
-    
+    </form>    
     <a href="/assets">Back to Assets</a>
-</body>
-</html>

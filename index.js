@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const mongoose = require('mongoose')
+const engine = require('ejs-mate')
 const methodOverride = require('method-override')
 const Asset = require('./models/asset')
 
@@ -15,6 +16,7 @@ main().catch((err) => console.log(err))
 
 app.listen(3000)
 
+app.engine('ejs', engine)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
@@ -24,12 +26,13 @@ app.use(methodOverride('_method'))
 const categories = ['Vehicle', 'Tool', 'Phone', 'Laptop/Tablet']
 
 app.get('/', (req, res) => {
-  res.render('home')
+  res.redirect('/assets')
 })
 
 // Index
 app.get('/assets', async (req, res) => {
   const assets = await Asset.find({})
+  assets.title = 'Campgrounds'
   res.render('assets/index', { assets })
 })
 
@@ -71,4 +74,8 @@ app.delete('/assets/:id', async (req, res) => {
   const { id } = req.params
   await Asset.findByIdAndRemove(id)
   res.redirect('/assets')
+})
+
+app.use((req, res) => {
+  res.status(404).render('err/404')
 })

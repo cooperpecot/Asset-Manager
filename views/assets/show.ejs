@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= a.name %> - <%= a.assetTag %></title>
-</head>
-<body>
+<% layout('layouts/boilerplate') %> 
     <h2><%= a.assetTag %> </h2>
     <p>
         Asset Name: <%= a.name %> 
@@ -33,5 +25,3 @@
     <form action="/assets/<%=a._id%>?_method=DELETE" method="POST">
         <button>Delete This Asset</button>
     </form>
-</body>
-</html>
