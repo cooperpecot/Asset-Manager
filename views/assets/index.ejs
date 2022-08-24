@@ -1,9 +1,107 @@
 <% layout('layouts/boilerplate') %> 
-<h1>Assets!</h1>
-    <div class="list-group">
-        <% for(let a of assets) {%>
-            <a class="list-group-item" href="/assets/<%= a._id %>">
-            <%= a.name %> - <%= a.assetTag %>
-            </a> 
-        <% } %>  
-    </div>
+
+<h1>All Assets</h1>
+
+<h3>Phones</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Model</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Status</th>
+            <th scope="col">Location / User</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let p of phones) {%>
+            <tr>
+                <td>
+                    <a href="/assets/<%= p._id %>"><i class="bi bi-search"></i></a>
+                </td>
+                <td><%= p.name %> </td>
+                <td><%= p.uniqueID %></td>
+                <td><%= p.assigned ? "Assigned" : "Open" %></td>
+                <td><%= p.location %></td>
+            </tr>
+        <% } %> 
+    </tbody>
+</table>
+
+<h3>Laptops / Tablets</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Model</th>
+            <th scope="col">Serial</th>
+            <th scope="col">Status</th>
+            <th scope="col">Location / User</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let l of lapTab) {%>
+            <tr>
+                <td>
+                    <a href="/assets/<%= l._id %>"><i class="bi bi-search"></i></a>
+                </td>
+                <td><%= l.name %> </td>
+                <td><%= l.uniqueID %></td>
+                <td><%= l.assigned ? "Assigned" : "Open" %></td>
+                <td><%= l.location %></td>
+            </tr>
+        <% } %> 
+    </tbody>
+</table>
+
+<h3>Vehicles</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Vehicle Number</th>
+            <th scope="col">VIN</th>
+            <th scope="col">Status</th>
+            <th scope="col">Location / User</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let v of vehicles) {%>
+            <tr>
+                <td>
+                    <a href="/assets/<%= v._id %>"><i class="bi bi-search"></i></a>
+                </td>
+                <td><%= v.name %> </td>
+                <td><%= v.uniqueID %></td>
+                <td><%= v.assigned ? "Assigned" : "Open" %></td>
+                <td><%= v.location %></td>
+            </tr>
+        <% } %> 
+    </tbody>
+</table>
+
+<h3>Tools</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Vehicle Number</th>
+            <th scope="col">VIN</th>
+            <th scope="col">Status</th>
+            <th scope="col">Location / User</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let t of tools) {%>
+            <tr>
+                <td>
+                    <a href="/assets/<%= t._id %>"><i class="bi bi-search"></i></a>
+                </td>
+                <td><%= t.name %> </td>
+                <td><%= t.uniqueID %></td>
+                <td><%= t.assigned ? "Assigned" : "Open" %></td>
+                <td><%= t.location %></td>
+            </tr>
+        <% } %> 
+    </tbody>
+</table>

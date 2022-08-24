@@ -31,9 +31,11 @@ app.get('/', (req, res) => {
 
 // Index
 app.get('/assets', async (req, res) => {
-  const assets = await Asset.find({})
-  assets.title = 'Campgrounds'
-  res.render('assets/index', { assets })
+  const phones = await Asset.find({ category: 'Phone' })
+  const vehicles = await Asset.find({ category: 'Vehicle' })
+  const tools = await Asset.find({ category: 'Tool' })
+  const lapTab = await Asset.find({ category: 'Laptop/Tablet' })
+  res.render('assets/index', { phones, vehicles, tools, lapTab })
 })
 
 // New
