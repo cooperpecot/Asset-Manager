@@ -2,13 +2,13 @@
     <div class="row">
         <h1 class="text-center">Edit</h1>
         <div class="col-6 offset-3">
-            <form action="/assets/<%= a._id %>?_method=PATCH" method="post">
+            <form action="/assets/<%= a._id %>?_method=PATCH" method="post" novalidate class="needs-validation">
                 <div class="mb-3">
                     <label class="form-label" for="asset-name">Name: </label>
-                    <input class="form-control" type="text" name="asset[name]" id="asset-name" value="<%= a.name %> " >
+                    <input class="form-control" type="text" name="asset[name]" id="asset-name" value="<%= a.name %> "  required>
                 </div>
                 <div class="mb-3">
-                    <select class="form-select" name="asset[category]" id="asset-category">
+                    <select class="form-select" name="asset[category]" id="asset-category" required>
                         <% for(let c of categories){ %>
                             <% const selected = a.category === c ? "selected" : "" %>
                             <option value="<%= c %>" <%= selected %> ><%= c %></option>        
@@ -17,20 +17,20 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="asset-id">Unique ID: </label>
-                    <input class="form-control" type="text" name="asset[uniqueID]" id="asset-id" value="<%= a.uniqueID %> ">
+                    <input class="form-control" type="text" name="asset[uniqueID]" id="asset-id" value="<%= a.uniqueID %> " required>
                     <small id="ID-help-block">ie Serial, Phone Number, VIN, etc</small>
                 </div>
                 <div class="mb-3">
                     <label class="form-label"for="asset-assigned">Is this asset assigned? </label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="asset[assigned]" value="true" id="assigned"
+                            <input class="form-check-input" type="radio" name="asset[assigned]" value="true" id="assigned" required
                             <% if(a.assigned){%>
                                 <%= "checked" %>
                             <%} %>>
                             <label for="assigned" class="form-check-label">Yes</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="asset[assigned]" value="false" id="unassigned" 
+                            <input class="form-check-input" type="radio" name="asset[assigned]" value="false" id="unassigned"  required
                             <% if(!a.assigned){%>
                                 <%= "checked" %>
                             <%} %>>
@@ -38,12 +38,12 @@
                         </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="asset-location">Location: </label>
-                    <input class="form-control" type="text" name="asset[location]" id="asset-location" value="<%= a.location %> ">
+                    <label class="form-label" for="asset-location">User / Location: </label>
+                    <input class="form-control" type="text" name="asset[location]" id="asset-location" value="<%= a.location %> " required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="asset-tag">Tag Number: </label>
-                    <input class="form-control" type="text" name="asset[assetTag]" id="asset-tag" value="<%= a.assetTag %> ">
+                    <input class="form-control" type="text" name="asset[assetTag]" id="asset-tag" value="<%= a.assetTag %> " required>
                 </div>
                 <button class="btn btn-success">Update</button>
             </form>
