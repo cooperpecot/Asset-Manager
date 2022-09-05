@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const engine = require('ejs-mate')
 const methodOverride = require('method-override')
 
+const { assetSchema } = require('./schemas')
 const catchAsync = require('./utilities/catchAsync')
 const ExpressError = require('./utilities/ExpressError')
 const Asset = require('./models/asset')
@@ -23,6 +24,16 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+
+const validateAsset = (req, res, next) => {
+  const { error } = assetSchema.validate(req.body)
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(',')
+    throw new ExpressError(400, msg)
+  } else {
+    next()
+  }
+}
 
 const categories = ['Vehicle', 'Tool', 'Phone', 'Laptop/Tablet']
 
@@ -45,8 +56,7 @@ app.get('/assets/new', (req, res) => {
 })
 
 // Create
-app.post('/assets', catchAsync(async (req, res, next) => {
-  if (!req.body.asset) throw new ExpressError(400, 'Invalid Asset Data')
+app.post('/assets', validateAsset, catchAsync(async (req, res, next) => {
   const a = new Asset(req.body.asset)
   await a.save()
   res.redirect('/assets')
@@ -67,7 +77,7 @@ app.get('/assets/:id/edit', catchAsync(async (req, res) => {
 }))
 
 // Update
-app.patch('/assets/:id', catchAsync(async (req, res) => {
+app.patch('/assets/:id', validateAsset, catchAsync(async (req, res) => {
   const { id } = req.params
   await Asset.findByIdAndUpdate(id, req.body.asset)
   res.redirect(`/assets/${id}`)
