@@ -7,9 +7,11 @@ const engine = require('ejs-mate')
 const methodOverride = require('method-override')
 
 const { assetSchema } = require('./schemas')
+const { inventoryLocationSchema } = require('./schemas')
 const catchAsync = require('./utilities/catchAsync')
 const ExpressError = require('./utilities/ExpressError')
 const Asset = require('./models/asset')
+const Location = require('./models/inventoryLocation')
 
 async function main() {
   await mongoose.connect('mongodb://localhost:27017/asset-tracker')
@@ -35,19 +37,36 @@ const validateAsset = (req, res, next) => {
   }
 }
 
-const categories = ['Vehicle', 'Tool', 'Phone', 'Laptop/Tablet']
+const validateLocation = (req, res, next) => {
+  const { error } = inventoryLocationSchema.validate(req.body.location)
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(',')
+    throw new ExpressError(400, msg)
+  } else {
+    next()
+  }
+}
+
+const assetCategories = ['Vehicle', 'Tool', 'Phone', 'Laptop/Tablet']
+const locationCategories = []
 
 app.get('/', (req, res) => {
   res.redirect('/assets')
 })
-
+// ASSET ROUTES
 // Index
 app.get('/assets', catchAsync(async (req, res) => {
-  const phones = await Asset.find({ category: 'Phone' })
-  const vehicles = await Asset.find({ category: 'Vehicle' })
-  const tools = await Asset.find({ category: 'Tool' })
-  const lapTab = await Asset.find({ category: 'Laptop/Tablet' })
-  res.render('assets/index', { phones, vehicles, tools, lapTab })
+  if (req.query.category) {
+    const q = await Asset.find({ category: req.query.category })
+    res.render('assets/index', { q })
+  } else {
+    const q = null
+    const phones = await Asset.find({ category: 'Phone' })
+    const vehicles = await Asset.find({ category: 'Vehicle' })
+    const tools = await Asset.find({ category: 'Tool' })
+    const lapTab = await Asset.find({ category: 'LaptopTablet' })
+    res.render('assets/index', { q, phones, vehicles, tools, lapTab })
+  }
 }))
 
 // New
@@ -73,7 +92,7 @@ app.get('/assets/:id', catchAsync(async (req, res) => {
 app.get('/assets/:id/edit', catchAsync(async (req, res) => {
   const { id } = req.params
   const a = await Asset.findById(id)
-  res.render('assets/edit', { a, categories })
+  res.render('assets/edit', { a, assetCategories })
 }))
 
 // Update
@@ -90,6 +109,65 @@ app.delete('/assets/:id', catchAsync(async (req, res) => {
   res.redirect('/assets')
 }))
 
+// LOCATION ROUTES
+// Index
+app.get('/locations', catchAsync(async (req, res) => {
+  if (req.query.category) {
+    const q = await Location.find({ category: req.query.category })
+    res.render('locations/index', { q })
+  } else {
+    const q = null
+    const offices = await Location.find({ category: 'OfficeWarehouse' })
+    const vehicles = await Location.find({ category: 'Vehicle' })
+    const jobsites = await Location.find({ category: 'Jobsite' })
+    const employees = await Location.find({ category: 'Employee' })
+    // const locations = await Location.find({})
+    res.render('locations/index', { q, offices, vehicles, jobsites, employees })
+  }
+}))
+
+// New
+app.get('/locations/new', (req, res) => {
+  res.render('locations/new')
+})
+
+// Create
+app.post('/locations', validateLocation, catchAsync(async (req, res) => {
+  const l = new Location(req.body.location)
+  l.address = req.body.address
+  await l.save()
+  res.redirect('/assets')
+}))
+
+// Show
+app.get('/locations/:id', catchAsync(async (req, res) => {
+  const { id } = req.params
+  const l = await Location.findById(id)
+  res.render('locations/show', { l })
+}))
+
+// Edit
+app.get('/locaitons/:id/edit', catchAsync(async (req, res) => {
+  const { id } = req.params
+  const l = await Location.findById(id)
+  res.render('locations/show', { l, locationCategories })
+}))
+
+// Update
+app.patch('/locations/:id', catchAsync(async (req, res) => {
+  const { id } = req.params
+  await Location.findByIdAndUpdate(id, req.body.location)
+  res.redirect(`/locations/${id}`)
+}))
+
+// Destroy
+app.delete('/assets/:id', catchAsync(async (req, res) => {
+  const { id } = req.params
+  await Location.findByIdAndRemove(id)
+  res.redirect('/locations')
+}))
+
+// ERROR ROUTES
 app.all('*', (req, res, next) => {
   next(new ExpressError(404, 'Page Not Found'))
 })

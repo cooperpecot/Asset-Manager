@@ -9,11 +9,29 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/assets">Assets</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Assets</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/assets">View All</a></li>
+              <li><a class="dropdown-item" href="/assets?category=Phone">Phones</a></li>
+              <li><a class="dropdown-item" href="/assets?category=LaptopTablet">Laptops / Tablets</a></li>
+              <li><a class="dropdown-item" href="/assets?category=Vehicle">Vehicles</a></li>
+              <li><a class="dropdown-item" href="/assets?category=Tool">Tools</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/assets/new">New Asset</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/assets/new">New Asset</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Locations</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/locations">View All</a></li>
+              <li><a class="dropdown-item" href="/locations?category=OfficeWarehouse">Offices and Warehouses</a></li>
+              <li><a class="dropdown-item" href="/locations?category=Jobsite">Jobsites</a></li>
+              <li><a class="dropdown-item" href="/locations?category=Vehicle">Vehicles</a></li>
+              <li><a class="dropdown-item" href="/locations?category=Employee">Employees</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/locations/new">New Location</a></li>
+            </ul>
           </li>
         </ul>
       </div>

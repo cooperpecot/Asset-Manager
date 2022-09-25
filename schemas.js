@@ -10,3 +10,15 @@ module.exports.assetSchema = Joi.object({
     uniqueID: Joi.string().required(),
   }).required(),
 })
+
+module.exports.inventoryLocationSchema = Joi.object({
+  name: Joi.string().required(),
+  address: Joi.object({
+    address: Joi.string().required(),
+    address2: Joi.string(),
+    city: Joi.string().required(),
+    state: Joi.string().required(),
+    zip: Joi.number().required(),
+  }),
+  category: Joi.string().required(),
+})

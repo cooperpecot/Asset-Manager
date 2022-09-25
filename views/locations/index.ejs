@@ -1,0 +1,72 @@
+<% layout('layouts/boilerplate') %>
+
+<h1 class="mb-2">Inventory Locations</h1>
+
+<% if(q) {%>
+    <div class="mb-4">
+        <% for(let location of q) {%> 
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"><%= location.name %></h4>
+                    <h5 class="card-subtitle mb-2 text-muted"><%= location.address.city %>, <%= location.address.state %></h5>
+                    <a href="/locations/<%=location._id%>" class="card-link">Details</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+<% } else {%> 
+    <div class="mb-4">
+        <h3>Offices and Warehouses</h3>
+        <% for(let o of offices) {%> 
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"><%= o.name %></h4>
+                    <h5 class="card-subtitle mb-2 text-muted"><%= o.address.city %>, <%= o.address.state %></h5>
+                    <a href="/locations/<%=o._id%>" class="card-link">Details</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="mb-4">
+        <h3>Jobsites</h3>
+        <% for(let job of jobsites) {%> 
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"><%= job.name %></h4>
+                    <h5 class="card-subtitle mb-2 text-muted"><%= job.address.city %>, <%= job.address.state %></h5>
+                    <a href="/locations/<%=job._id%>" class="card-link">Details</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+
+
+    <div class="mb-4">
+        <h3>Vehicles</h3>
+        <% for(let v of vehicles) {%> 
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"><%= v.name %></h4>
+                    <h5 class="card-subtitle mb-2 text-muted"><%= v.address.city %>, <%= v.address.state %></h5>
+                    <a href="/locations/<%=v._id%>" class="card-link">Details</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="mb-4">
+        <h3>Employees</h3>      
+        <% for(let e of employees) {%> 
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"><%= e.name %></h4>
+                    <h5 class="card-subtitle mb-2 text-muted"><%= e.address.city %>, <%= e.address.state %></h5>
+                    <a href="/locations/<%=e._id%>" class="card-link">Details</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+<% } %> 
+
