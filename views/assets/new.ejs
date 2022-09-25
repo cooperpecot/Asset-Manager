@@ -39,7 +39,12 @@
 
             <div class="mb-3">
                 <label class="form-label" for="asset-location">Location: </label>
-                <input class="form-control" type="text" name="asset[location]" id="asset-location" required>
+                <select name="asset[location]" id="asset-location">
+                    <option value="">Select Inventory Location</option>
+                    <% for(let location of l) {%>
+                    <option value=<%=location%>><%=location.name%></option>
+                    <%}%> 
+                </select>
                 <div class="invalid-feedback">Location is a required!</div>
             </div>
             <div class="mb-3">

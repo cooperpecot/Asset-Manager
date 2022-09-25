@@ -9,7 +9,7 @@ const AssetSchema = new Schema({
   },
   category: {
     type: String,
-    enum: ['Vehicle', 'Tool', 'Phone', 'Laptop/Tablet'],
+    enum: ['Vehicle', 'Tool', 'Phone', 'LaptopTablet'],
     required: true,
   },
   assigned: {
@@ -17,10 +17,7 @@ const AssetSchema = new Schema({
     default: false,
     required: true,
   },
-  location: {
-    type: String,
-    required: true,
-  },
+  location: [{ type: Schema.Types.ObjectId, ref: 'InventoryLocation' }],
   assetTag: Number,
   uniqueID: String,
 })
