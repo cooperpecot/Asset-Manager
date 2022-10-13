@@ -9,7 +9,7 @@
                 </div>
                 <div class="mb-3">
                     <select class="form-select" name="asset[category]" id="asset-category" required>
-                        <% for(let c of categories){ %>
+                        <% for(let c of assetCategories){ %>
                             <% const selected = a.category === c ? "selected" : "" %>
                             <option value="<%= c %>" <%= selected %> ><%= c %></option>        
                         <%} %>
@@ -19,27 +19,6 @@
                     <label class="form-label" for="asset-id">Unique ID: </label>
                     <input class="form-control" type="text" name="asset[uniqueID]" id="asset-id" value="<%= a.uniqueID %>" required>
                     <small id="ID-help-block">ie Serial, Phone Number, VIN, etc</small>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label"for="asset-assigned">Is this asset assigned? </label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="asset[assigned]" value="true" id="assigned" required
-                            <% if(a.assigned){%>
-                                <%= "checked" %>
-                            <%} %>>
-                            <label for="assigned" class="form-check-label">Yes</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="asset[assigned]" value="false" id="unassigned"  required
-                            <% if(!a.assigned){%>
-                                <%= "checked" %>
-                            <%} %>>
-                            <label for="unassigned" class="form-check-label">No</label>
-                        </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="asset-location">User / Location: </label>
-                    <input class="form-control" type="text" name="asset[location]" id="asset-location" value="<%= a.location %>" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="asset-tag">Tag Number: </label>

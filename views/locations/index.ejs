@@ -1,7 +1,8 @@
 <% layout('layouts/boilerplate') %>
-
-<h1 class="mb-2">Inventory Locations</h1>
-
+<div class="align-items-center">
+    <a class="btn btn-success float-end mt-1" href="/locations/new">Create New</a>
+    <h1 class="mb-3">Inventory Locations</h1>
+</div> 
 <% if(q) {%>
     <div class="mb-4">
         <% for(let location of q) {%> 
@@ -15,58 +16,139 @@
         <% } %>
     </div>
 <% } else {%> 
-    <div class="mb-4">
-        <h3>Offices and Warehouses</h3>
-        <% for(let o of offices) {%> 
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title"><%= o.name %></h4>
-                    <h5 class="card-subtitle mb-2 text-muted"><%= o.address.city %>, <%= o.address.state %></h5>
-                    <a href="/locations/<%=o._id%>" class="card-link">Details</a>
+    <div class="accordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Offices & Warehouses
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                <div class="accordion-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Link</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">City</th>
+                                <th scope="col">State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let o of offices) {%>
+                                <tr>
+                                    <td>
+                                        <a href="/locations/<%= o._id %>"><i class="bi bi-search"></i></a>
+                                    </td>
+                                    <td><%= o.name %> </td>
+                                    <td><%= o.address.city %></td>
+                                    <td><%= o.address.state %></td>
+                                </tr>
+                            <% } %> 
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        <% } %>
-    </div>
-
-    <div class="mb-4">
-        <h3>Jobsites</h3>
-        <% for(let job of jobsites) {%> 
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title"><%= job.name %></h4>
-                    <h5 class="card-subtitle mb-2 text-muted"><%= job.address.city %>, <%= job.address.state %></h5>
-                    <a href="/locations/<%=job._id%>" class="card-link">Details</a>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">   
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Jobsites
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                <div class="accordion-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Link</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">City</th>
+                                <th scope="col">State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let j of jobsites) {%>
+                                <tr>
+                                    <td>
+                                        <a href="/locations/<%= j._id %>"><i class="bi bi-search"></i></a>
+                                    </td>
+                                    <td><%= j.name %> </td>
+                                    <td><%= j.address.city %></td>
+                                    <td><%= j.address.state %></td>
+                                </tr>
+                            <% } %> 
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        <% } %>
-    </div>
-
-
-
-    <div class="mb-4">
-        <h3>Vehicles</h3>
-        <% for(let v of vehicles) {%> 
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title"><%= v.name %></h4>
-                    <h5 class="card-subtitle mb-2 text-muted"><%= v.address.city %>, <%= v.address.state %></h5>
-                    <a href="/locations/<%=v._id%>" class="card-link">Details</a>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">   
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collpaseThree" aria-expanded="false" aria-controls="collpaseThree">
+                Vehicles
+              </button>
+            </h2>
+            <div id="collpaseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                <div class="accordion-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Link</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">City</th>
+                                <th scope="col">State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let v of vehicles) {%>
+                                <tr>
+                                    <td>
+                                        <a href="/locations/<%= v._id %>"><i class="bi bi-search"></i></a>
+                                    </td>
+                                    <td><%= v.name %> </td>
+                                    <td><%= v.address.city %></td>
+                                    <td><%= v.address.state %></td>
+                                </tr>
+                            <% } %> 
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        <% } %>
-    </div>
-
-    <div class="mb-4">
-        <h3>Employees</h3>      
-        <% for(let e of employees) {%> 
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title"><%= e.name %></h4>
-                    <h5 class="card-subtitle mb-2 text-muted"><%= e.address.city %>, <%= e.address.state %></h5>
-                    <a href="/locations/<%=e._id%>" class="card-link">Details</a>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">   
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Employeesa
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
+                <div class="accordion-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Link</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">City</th>
+                                <th scope="col">State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let e of employees) {%>
+                                <tr>
+                                    <td>
+                                        <a href="/locations/<%= e._id %>"><i class="bi bi-search"></i></a>
+                                    </td>
+                                    <td><%= e.name %> </td>
+                                    <td><%= e.address.city %></td>
+                                    <td><%= e.address.state %></td>
+                                </tr>
+                            <% } %> 
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        <% } %>
+        </div>
     </div>
 <% } %> 
 
