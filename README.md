@@ -1,6 +1,5 @@
 # To Do
-- Search / Filter index
-- Assignment History on Show page
-- Locations Model
+- Unassign from Location
+- Assignment History on Show 
 - Auth
 - Cluster Map
