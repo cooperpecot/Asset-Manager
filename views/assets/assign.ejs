@@ -1,0 +1,28 @@
+<% layout('layouts/boilerplate') %> 
+<form action="/locations/<%= id %>/assets" method="post">
+<h3>Select Assets to Assign to <%= l.name %> </h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Category</th>
+                <th scope="col">Name</th>
+                <th scope="col">Unique ID</th>
+                <th scope="col">Tag Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let a of assets) {%>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="assets" id="" value=<%= a._id %>>
+                    </td>
+                    <td><%= a.category %></td>
+                    <td><%= a.name %> </td>
+                    <td><%= a.uniqueID %></td>
+                    <td><%= a.assetTag %></td>
+                </tr>
+            <% } %> 
+        </tbody>
+    </table>
+    <button class="btn btn-success">Apply</button></form>

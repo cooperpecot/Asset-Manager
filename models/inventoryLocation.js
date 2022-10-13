@@ -37,7 +37,9 @@ const InventoryLocationSchema = new Schema({
     enum: ['Vehicle', 'Employee', 'OfficeWarehouse', 'Jobsite'],
     required: true,
   },
-  assets: [{ type: Schema.Types.ObjectId, ref: 'Asset' }],
+  assets: [
+    { type: Schema.Types.ObjectId, ref: 'Asset' },
+  ],
 })
 
 module.exports = mongoose.model('InventoryLocation', InventoryLocationSchema)

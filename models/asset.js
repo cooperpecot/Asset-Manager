@@ -15,9 +15,12 @@ const AssetSchema = new Schema({
   assigned: {
     type: Boolean,
     default: false,
-    required: true,
   },
-  location: [{ type: Schema.Types.ObjectId, ref: 'InventoryLocation' }],
+  location: {
+    type: Schema.Types.ObjectId,
+    ref: 'InventoryLocation',
+    default: '633cda2b7e8b14694297330f',
+  },
   assetTag: Number,
   uniqueID: String,
 })
